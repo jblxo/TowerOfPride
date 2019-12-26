@@ -59,7 +59,7 @@ namespace TowerOfHanoi
             Disk disk = towerFrom.GetLastDisk();
             Disk lastDisk = towerTo.GetLastDisk();
 
-            if (lastDisk != null && disk.Weight > lastDisk.Weight)
+            if (lastDisk != null && disk != null && disk.Weight > lastDisk.Weight)
                 return;
 
             disk = towerFrom.PopDisk();

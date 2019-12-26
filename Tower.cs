@@ -54,6 +54,9 @@ namespace TowerOfHanoi
 
         public void AddDisk(Disk d)
         {
+            if (d == null)
+                return;
+
             d.SetPosition(new Point(Width / 2 - 1, Height - 1 - ((Disks.Count + 1) * 5 * 2)));
             Disks.Add(d);
         }
