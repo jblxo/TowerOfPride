@@ -69,7 +69,7 @@ namespace TowerOfHanoi
 
         private void CheckEnd()
         {
-            if(towerRight.Disks.Count == GameData.Instance.NumOfDisks)
+            if(towerRight.GetDisks().Count == GameData.Instance.NumOfDisks)
             {
                 MessageBox.Show("You won!");
                 Close();

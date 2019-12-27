@@ -14,21 +14,32 @@ namespace TowerOfHanoi
     {
         private Pen customPen;
         public event Action<Tower> TowerSelected;
-        public List<Disk> Disks { get; set; } = new List<Disk>();
+        private List<Disk> disks;
 
         public Tower()
         {
             InitializeComponent();
 
             customPen = new Pen(Color.Black, 4);
+            disks = new List<Disk>();
+        }
+
+        public List<Disk> GetDisks()
+        {
+            return disks;
+        }
+
+        public void SetDisks(List<Disk> disks)
+        {
+            this.disks = disks;
         }
 
         public Disk PopDisk()
         {
-            if(Disks.Count > 0)
+            if(disks.Count > 0)
             {
-                Disk disk = Disks.Last();
-                Disks.Remove(disk);
+                Disk disk = disks.Last();
+                disks.Remove(disk);
                 return disk;
             }
 
@@ -37,16 +48,16 @@ namespace TowerOfHanoi
 
         public Disk GetLastDisk()
         {
-            if(Disks.Count > 0)
+            if(disks.Count > 0)
             {
-                return Disks.Last();
+                return disks.Last();
             }
             return null;
         }
 
-        public void DrawDisks(Graphics g)
+        public void Drawdisks(Graphics g)
         {
-            foreach(var disk in Disks)
+            foreach(var disk in disks)
             {
                 disk.Draw(g);
             }
@@ -57,15 +68,15 @@ namespace TowerOfHanoi
             if (d == null)
                 return;
 
-            d.SetPosition(new Point(Width / 2 - 1, Height - 1 - ((Disks.Count + 1) * 5 * 2)));
-            Disks.Add(d);
+            d.SetPosition(new Point(Width / 2 - 1, Height - 1 - ((disks.Count + 1) * 5 * 2)));
+            disks.Add(d);
         }
 
         private void Canvas_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.DrawLine(customPen, 1, Height - 1, Width - 1, Height - 1);
             e.Graphics.DrawLine(customPen, Width / 2 - 1, 1, Width / 2 - 1, Height - 1);
-            DrawDisks(e.Graphics);
+            Drawdisks(e.Graphics);
         }
 
         private void Canvas_MouseClick(object sender, MouseEventArgs e)
