@@ -7,6 +7,7 @@ namespace TowerOfHanoi
     {
         private Tower towerFrom;
         private Tower towerTo;
+        private int turnCount;
 
         public ManualGame()
         {
@@ -15,8 +16,15 @@ namespace TowerOfHanoi
             PrepareGame();
         }
 
+        private void SetTurnCount(int count)
+        {
+            turnCount = count;
+            lblTurnCount.Text = count.ToString();
+        }
+
         private void PrepareGame()
         {
+            SetTurnCount(0);
             GenerateDisks();
             InitTowers();
         }
@@ -65,6 +73,7 @@ namespace TowerOfHanoi
             disk = towerFrom.PopDisk();
 
             towerTo.AddDisk(disk);
+            SetTurnCount(turnCount + 1);
         }
 
         private void CheckEnd()
