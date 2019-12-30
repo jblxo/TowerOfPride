@@ -61,19 +61,30 @@ namespace TowerOfHanoi
 
         private void TransferDisk(Tower towerFrom, Tower towerTo)
         {
-            if (towerFrom == towerTo)
-                return;
-
             Disk disk = towerFrom.GetLastDisk();
             Disk lastDisk = towerTo.GetLastDisk();
 
-            if (lastDisk != null && disk != null && disk.Weight > lastDisk.Weight)
+            if (!IsValid(disk, lastDisk))
                 return;
 
             disk = towerFrom.PopDisk();
 
             towerTo.AddDisk(disk);
             SetTurnCount(turnCount + 1);
+        }
+
+        private bool IsValid(Disk disk, Disk lastDisk)
+        {
+            if (disk == null)
+                return false;
+
+            if (lastDisk == null)
+                return true;
+
+            if (lastDisk.Weight < disk.Weight)
+                return false;
+
+            return true;
         }
 
         private void CheckEnd()
