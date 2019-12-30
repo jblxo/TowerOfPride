@@ -38,7 +38,9 @@ namespace TowerOfHanoi
 
         private void TowerSelected(Tower tower)
         {
-            if(towerFrom == null)
+            tower.BorderStyle = BorderStyle.FixedSingle;
+
+            if (towerFrom == null)
             {
                 towerFrom = tower;
 
@@ -65,6 +67,7 @@ namespace TowerOfHanoi
 
         private void TransferDisk(Tower towerFrom, Tower towerTo)
         {
+            ClearBorders();
             Disk disk = towerFrom.GetLastDisk();
             Disk lastDisk = towerTo.GetLastDisk();
 
@@ -75,6 +78,13 @@ namespace TowerOfHanoi
 
             towerTo.AddDisk(disk);
             SetTurnCount(turnCount + 1);
+        }
+
+        private void ClearBorders()
+        {
+            towerLeft.ClearBorder();
+            towerMiddle.ClearBorder();
+            towerRight.ClearBorder();
         }
 
         private bool IsValid(Disk disk, Disk lastDisk)

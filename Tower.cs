@@ -72,6 +72,11 @@ namespace TowerOfHanoi
             disks.Add(d);
         }
 
+        public void ClearBorder()
+        {
+            BorderStyle = BorderStyle.None;
+        }
+
         private void Canvas_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.DrawLine(customPen, 1, Height - 1, Width - 1, Height - 1);
@@ -82,7 +87,9 @@ namespace TowerOfHanoi
         private void Canvas_MouseClick(object sender, MouseEventArgs e)
         {
             if (TowerSelected != null)
+            {
                 TowerSelected(this);
+            }             
         }
     }
 }
