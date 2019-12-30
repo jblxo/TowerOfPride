@@ -42,6 +42,7 @@
             this.canvas.TabStop = false;
             this.canvas.Paint += new System.Windows.Forms.PaintEventHandler(this.Canvas_Paint);
             this.canvas.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Canvas_MouseClick);
+            this.canvas.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.Canvas_MouseClick);
             // 
             // Tower
             // 

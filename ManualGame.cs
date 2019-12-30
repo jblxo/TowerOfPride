@@ -41,11 +41,15 @@ namespace TowerOfHanoi
             if(towerFrom == null)
             {
                 towerFrom = tower;
+
+                if (towerFrom.GetDisks().Count < 1)
+                    towerFrom = null;
             } else
             {
                 towerTo = tower;
                 TransferDisk(towerFrom, towerTo);
                 towerFrom = null;
+                towerTo = null;
             }
 
             RefreshTowers();
@@ -75,6 +79,9 @@ namespace TowerOfHanoi
 
         private bool IsValid(Disk disk, Disk lastDisk)
         {
+            if (towerFrom == towerTo)
+                return false;
+
             if (disk == null)
                 return false;
 
