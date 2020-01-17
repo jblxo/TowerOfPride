@@ -21,9 +21,16 @@ namespace TowerOfHanoi
 
             PrepareGame();
 
+            FormClosing += AutoGame_FormClosing;
+
             autoPlay = new Thread(AutoSolve);
             autoPlay.IsBackground = true;
             autoPlay.Start();
+        }
+
+        private void AutoGame_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            autoPlay.Abort();
         }
 
         private void SetTurnCount(int count)
