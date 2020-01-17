@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AutoGame.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AutoGame.Designer.cs">
+      <DependentUpon>AutoGame.cs</DependentUpon>
+    </Compile>
     <Compile Include="Disk.cs" />
     <Compile Include="GameData.cs" />
     <Compile Include="ManualGame.cs">
@@ -68,6 +74,9 @@
     <Compile Include="Tower.Designer.cs">
       <DependentUpon>Tower.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="AutoGame.resx">
+      <DependentUpon>AutoGame.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ManualGame.resx">
       <DependentUpon>ManualGame.cs</DependentUpon>
     </EmbeddedResource>

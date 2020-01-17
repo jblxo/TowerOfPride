@@ -86,6 +86,7 @@
             this.btnStartAutoGame.TabIndex = 4;
             this.btnStartAutoGame.Text = "Auto Game";
             this.btnStartAutoGame.UseVisualStyleBackColor = true;
+            this.btnStartAutoGame.Click += new System.EventHandler(this.btnStartAutoGame_Click);
             // 
             // Menu
             // 

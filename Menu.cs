@@ -35,5 +35,10 @@ namespace TowerOfHanoi
             form.FormClosed += (sender, args) => Show();
             Hide();
         }
+
+        private void btnStartAutoGame_Click(object sender, EventArgs e)
+        {
+            SwitchForms(new AutoGame());
+        }
     }
 }
