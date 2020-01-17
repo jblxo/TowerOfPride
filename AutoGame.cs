@@ -1,5 +1,7 @@
-﻿using System;
+﻿using System.Collections.Generic;
+using System.Threading;
 using System.Windows.Forms;
+using ExtensionMethods;
 
 namespace TowerOfHanoi
 {
@@ -8,12 +10,20 @@ namespace TowerOfHanoi
         private Tower towerFrom;
         private Tower towerTo;
         private int turnCount;
+        private Thread autoPlay;
+        private int numOfDiscs = 0;
+        private List<TowersMove> moves = new List<TowersMove>();
+        private int autoPlaySpeed = 500;
 
         public AutoGame()
         {
             InitializeComponent();
 
             PrepareGame();
+
+            autoPlay = new Thread(AutoSolve);
+            autoPlay.IsBackground = true;
+            autoPlay.Start();
         }
 
         private void SetTurnCount(int count)
@@ -24,6 +34,8 @@ namespace TowerOfHanoi
 
         private void PrepareGame()
         {
+            numOfDiscs = GameData.Instance.NumOfDisks;
+            SolveGame(numOfDiscs, towerLeft, towerRight, towerMiddle);
             SetTurnCount(0);
             GenerateDisks();
             InitTowers();
@@ -123,5 +135,37 @@ namespace TowerOfHanoi
                 towerLeft.AddDisk(disk);
             }
         }
+
+        private void SolveGame(int diskCount, Tower fromPole, Tower toPole, Tower viaPole)
+        {
+            if (diskCount == 1)
+            {
+                moves.Add(new TowersMove { TowerFrom = fromPole, TowerTo = toPole });
+            }
+            else
+            {
+                SolveGame(diskCount - 1, fromPole, viaPole, toPole);
+                SolveGame(1, fromPole, toPole, viaPole);
+                SolveGame(diskCount - 1, viaPole, toPole, fromPole);
+            }
+        }
+
+        private void AutoSolve()
+        {
+            for(int i = 0; i < moves.Count; i++)
+            {
+                this.PerformSafely(() => TowerSelected(moves[i].TowerFrom));
+                this.PerformSafely(() => TowerSelected(moves[i].TowerTo));
+                Thread.Sleep(autoPlaySpeed);
+            }
+        }
+
+        private void tBAutoPlaySpeed_ValueChanged(object sender, System.EventArgs e)
+        {
+            autoPlaySpeed = tBAutoPlaySpeed.Value * 100;
+            lblAutoPlaySpeedValue.Text = (tBAutoPlaySpeed.Value * 100) + "ms";
+        }
     }
+
+    
 }
